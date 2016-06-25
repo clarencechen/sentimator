@@ -22,28 +22,49 @@ console.log("websocket server created")
 
 function setUpSocket() {
 	wss.on("connection", function(ws) {
- 		console.log("websocket connection open")
+		console.log("websocket connection open")
 		ws.on("message", function(data, flags) {
-  			var stuff = data.split("::")
-  			var id = stuff[0]
-  			var data = stuff[1]
-  		
-  			switch (id) {
-  				case "query":
-  					callQuery(data, function(data) {
-  						console.log("In callback")
-  						ws.send("object::"+JSON.stringify(data))
-  					})
-  					break
-  				default:
-  			
-  			}
-  	});
-  	ws.on("close", function() {
-    	console.log("websocket connection close")
-    	setUpSocket()
-  	})
+			var stuff = data.split("::")
+			var id = stuff[0]
+			var data = stuff[1]
+		
+			switch (id) {
+				case "query":
+					callQuery(data, function(data) {
+						console.log("In callback")
+						ws.send("object::"+JSON.stringify(data))
+					})
+					break
+				default:
+			
+			}
+	});
+	ws.on("close", function() {
+		console.log("websocket connection close")
+		setUpSocket()
+	})
 })
 }
 
 setUpSocket()
+
+var jobID
+
+var data = {'text' : 'This resteraunt\'s burgers smelled.'}
+/*
+function fetchData() {
+
+}
+*/
+
+client.post('analyzesentiment', data, true, function(err, resp, body) {
+	jobID = resp.body.jobID
+	console.log(jobID)
+})
+
+client.getJobStatus(jobID, function(err, resp, body) {
+	if(err)
+		console.log(error)
+	else
+		console.log(resp.body)
+})
