@@ -57,11 +57,13 @@ function display_popup(maintain, show) {
 	else if(element === null && show === true)
 	{
 		register_popup(0, 'chatbot')
+		$('div.popup-messages').append('<p class="bot-messages">Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?</p>')
 	}
 	else if(show === false)
 	{
 		element.style.display = "none";
 	}
+
 }
 
 function submitToBot() {
