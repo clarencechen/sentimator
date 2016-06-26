@@ -10,7 +10,7 @@ $(document).ready(function() {
 		}
 	})
 	ws.onmessage = function(event){
-	if(event.data.aggregate.sentiment == "negative")
+	if(JSON.parse(event.data).aggregate.sentiment == "negative")
 		startBot(event)
 	else
 		$('body').append('<p class="review">' + currQuery + '</p>')
