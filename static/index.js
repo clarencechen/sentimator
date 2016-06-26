@@ -81,7 +81,7 @@ function register_popup(id, name) {
 	element += '<div class="popup-head">';
 	element += '<div class="popup-head-left">'+ name +'</div>';
 	element += '<div class="popup-head-right"></div>';
-	element += '<div style="clear: both"></div></div><div class="popup-messages"></div>'
+	element += '<div style="clear: both"></div></div>'
 	element += '<div class="popup-foot">';
 	element += '<textarea class="popup-reply" rows="1"></textarea>';
 	element += '<button class="popup-send" id="send">Send</button>';
