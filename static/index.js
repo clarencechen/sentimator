@@ -26,7 +26,7 @@ $(document).ready(function() {
 		else if(obj.negative[0])
 			startBot(event)
 		else
-			$('footer').append('<p class="review">' + currQuery + '</p>')
+			$('#review').append('<p class="review">' + currQuery + '</p>')
 	}
 })
 $(document).resize(function(event) {
