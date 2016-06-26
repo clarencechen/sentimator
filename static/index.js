@@ -43,7 +43,7 @@ function display_popup(maintain, show) {
 	if(element !== null && maintain === true)
 	{
 		element.style.right = "220 px";
-		element.style.display = "block";
+		element.style.display = "flex";
 	}
 	else if(element === null && show === true)
 	{
