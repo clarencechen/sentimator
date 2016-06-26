@@ -16,11 +16,11 @@ server.listen(port)
 
 var WebSocket = require("ws")
 var ws = new WebSocket('wss://sentimator.herokuapp.com/')
+var WebSocketServer = require("ws").Server
+var wss = new WebSocketServer({server: server})
+console.log("websocket server created")
 
 function setUpSocket() {
-	var WebSocketServer = require("ws").Server
-	var wss = new WebSocketServer({server: server})
-	console.log("websocket server created")
 	wss.on("connection", function(ws) {
 		console.log("websocket connection open")
 		ws.on("message", function(data) {//data from webpage
@@ -46,7 +46,6 @@ function setUpSocket() {
 		});
 		ws.on("close", function() {
 			console.log("websocket connection close")
-			setUpSocket()
 		})
 	})
 }
