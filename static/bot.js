@@ -58,28 +58,35 @@ function conversationpatterns(input) {
 	{
 		ws.send("sentiquery::" + input);
 		console.log("emitted " + input);
-		ws.onmessage = function(event){
-			var obj = JSON.parse(event.data)
-			if(obj.error)
-				console.log(JSON.stringify(obj.error))
-			else if(obj.negative[0])
-				output = "I'm sorry that you didn't like the " + obj.negative[0].topic +". Tell me more."
-			else
-				output = "I didn't really get what complaints you have. Please try rephrasing your sentence."
+		while(output === undefined)
+		{
+			ws.onmessage = function(event){
+				var obj = JSON.parse(event.data)
+				if(obj.error)
+					console.log(JSON.stringify(obj.error))
+				else if(obj.negative[0])
+					output = "I'm sorry that you didn't like the " + obj.negative[0].topic +". Tell me more."
+				else
+					output = "I didn't really get what complaints you have. Please try rephrasing your sentence."
+			}
 		}
+		
 	}
 	else if(last.contains('I\'m sorry that you didn\'t like the ') || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
 	{
 		ws.send("sentiquery::" + input);
 		console.log("emitted " + input);
-		ws.onmessage = function(event){
-			var obj = JSON.parse(event.data)
-			if(obj.error)
-				console.log(JSON.stringify(obj.error))
-			else if(obj.negative[0])
-				output = "We will try our utmost to improve our " + obj.negative[0].topic + " in the future. Also, as an apology, we will offer you a free A La Carte item if you deicide to come again."
-			else
-				output = "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly."
+		while(output === undefined)
+		{
+			ws.onmessage = function(event){
+				var obj = JSON.parse(event.data)
+				if(obj.error)
+					console.log(JSON.stringify(obj.error))
+				else if(obj.negative[0])
+					output = "We will try our utmost to improve our " + obj.negative[0].topic + " in the future. Also, as an apology, we will offer you a free A La Carte item if you deicide to come again."
+				else
+					output = "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly."
+			}	
 		}
 	}
 	else
