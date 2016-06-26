@@ -66,7 +66,7 @@ function conversationpatterns(input) {
 			index = Math.ceil( len * Math.random());
 			reply = convpatterns[i][index];
 			var output = input.replace(re, reply);
-			output = initialCap(soutput);
+			output = initialCap(output);
 			return output;
 			break;
 		}
