@@ -56,13 +56,15 @@ function display_popup(maintain, show) {
 
 //creates markup for a new popup. Adds the id to popups array.
 function register_popup(id, name) {
-	var	element = '<div class="col-md-3">' 
+	var	element = '<div class="col-md-3 centered">' 
 	element += '<div class="popup-box chat-popup" id="'+ id +'">';
 	element += '<div class="popup-head">';
 	element += '<div class="popup-head-left">'+ name +'</div>';
 	element += '<div class="popup-head-right"><a href="javascript:display_popup(false, false);">&#10005;</a></div>';
 	element += '<div style="clear: both"></div></div><div class="popup-messages"></div>'
-	element += '<div class="popup-reply"><textarea class="popup-reply" rows="1"></textarea></div>';
-	element += '</div>'
+	element += '<div class="popup-foot">';
+	element += '<textarea class="popup-reply" rows="1"></textarea>';
+	element += '<button class="popup-send" id="send">Send</button>';
+	element += '</div></div>'
 	$("#chatbot").html(element)
 }
