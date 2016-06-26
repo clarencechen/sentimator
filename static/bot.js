@@ -56,8 +56,8 @@ function mainroutine(input) {
 		else if(obj.negative[0])
 		{
 			if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
-				output = "I'm sorry that you didn't like the " + obj.negative[0].topic +". Tell me more."
-			else if(last.contains('I\'m sorry that you didn\'t like the ') || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
+				output = "I'm sorry that you didn't like " + obj.negative[0].topic +". Tell me more."
+			else if(last.indexOf('I\'m sorry that you didn\'t like ') > -1 || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
 				output = "We will try our utmost to improve our " + obj.negative[0].topic + " in the future. Also, as an apology, we will offer you a free A La Carte item if you deicide to come again."
 			else
 				output = "Goodbye."
@@ -66,7 +66,7 @@ function mainroutine(input) {
 		{
 			if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
 				output = "I didn't really get what complaints you have. Please try rephrasing your sentence."
-			else if(last.contains('I\'m sorry that you didn\'t like the ') || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
+			else if(last.indexOf('I\'m sorry that you didn\'t like ') > -1 || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
 				output = "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly."
 			else
 				output = "Goodbye."
