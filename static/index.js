@@ -1,11 +1,6 @@
 var host = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(host);
-var dummy = "This restaraunt\'s burgers smelled terrible."
 $(document).ready(function() {
-	
-	ws.onopen = function(){
-		ws.send("querytext::" + dummy)
-	}
 	$("button#submit").click(submitQuery);
 	$("#form-control").keypress(function(e){
 		if(e.which == 13) {
