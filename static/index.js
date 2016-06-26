@@ -40,7 +40,7 @@ function startBot(event) {
 
 function display_popup(maintain, show) {
 	var element = document.getElementById('popup');
-	if(element !== undefined && maintain === true)
+	if(element !== null && maintain === true)
 	{
 		element.style.right = "220 px";
 		element.style.display = "block";
