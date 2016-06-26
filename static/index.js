@@ -10,14 +10,15 @@ $(document).ready(function() {
 			currQuery = submitQuery()
 		}
 	})
-	$(".popup-send").click(submitToBot)
-	$(".popup-reply").keypress(function(e){
+	$("#chatbot").on('click', '.popup-send', function(e) {
+		submitToBot();
+	})
+	$(#chatbot).on('click', '.popup-reply', function(e) {
 		if(e.which == 13) {
 			e.preventDefault()
 			submitToBot()
 		}
 	})
-
 	ws.onmessage = function(event){
 		var obj = JSON.parse(event.data)
 		if(obj.error)
