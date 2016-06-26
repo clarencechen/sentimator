@@ -33,6 +33,5 @@ function submitQuery() {
 function startBot(event) {
 	var obj = JSON.parse(event.data)
 	console.log('We got a negative review: ' + JSON.stringify(obj))
-	else
-		$("p#chatbot").html(JSON.stringify(obj))
+	$("p#chatbot").html(JSON.stringify(obj))
 }
