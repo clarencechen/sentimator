@@ -23,7 +23,7 @@ console.log("websocket server created")
 function setUpSocket() {
 	wss.on("connection", function(ws) {
 		console.log("websocket connection open")
-		ws.on("message", function(data)//data from webpage
+		ws.on("message", function(data) {//data from webpage
 			var stuff = data.split("::")
 			var id = stuff[0]
 			var data = stuff[1]
