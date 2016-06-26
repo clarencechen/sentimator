@@ -39,7 +39,7 @@ function startBot(event) {
 }
 
 function display_popup(maintain, show) {
-	var element = document.getElementById('popup');
+	var element = document.getElementById('0');
 	if(element !== null && maintain === true)
 	{
 		element.style.display = "block";
