@@ -23,18 +23,21 @@ console.log("websocket server created")
 function setUpSocket() {
 	wss.on("connection", function(ws) {
 		console.log("websocket connection open")
-		ws.on("message", function(data, flags) {
+		ws.on("message", function(data)//data from webpage
 			var stuff = data.split("::")
 			var id = stuff[0]
 			var data = stuff[1]
 		
 			switch (id) {
-				case "query":
-					callQuery(data, function(data) {
+				case "querytext":
+				{
+					var formatted = {'text' : data}
+					callQuery(formatted, function(formatted) {
 						console.log("In callback")
-						ws.send("object::"+JSON.stringify(data))
+						ws.send(JSON.stringify(data))//send to webpage
 					})
 					break
+				}
 				default:
 			
 			}
@@ -49,22 +52,30 @@ function setUpSocket() {
 setUpSocket()
 
 var jobID
-
-var data = {'text' : 'This resteraunt\'s burgers smelled.'}
 /*
 function fetchData() {
 
 }
 */
+callQuery(data, )
+function callQuery(data, callback) {
+	client.post('analyzesentiment', data, true, function(err, resp) {
+		jobID = resp.body.jobID
+		console.log(jobID)
+	})
+	
+	client.getJobStatus(jobID, function(err, resp) {
+		if(err)
+		{
+			console.log(err)
+			bail(err, callback)
+		}
+		else
+			console.log(resp.body)
+	})
+}
 
-client.post('analyzesentiment', data, true, function(err, resp, body) {
-	jobID = resp.body.jobID
-	console.log(jobID)
-})
-
-client.getJobStatus(jobID, function(err, resp, body) {
-	if(err)
-		console.log(error)
-	else
-		console.log(resp.body)
-})
+function bail(err, callback) {
+	var error = {isError: true, error: err}
+	callback(error)
+}
