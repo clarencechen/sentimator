@@ -3,6 +3,7 @@ var ws = new WebSocket(host);
 
 $(document).ready(function() {
 	ws = new WebSocket(host);
+	ws.send("querytext::" + dummy)
 	ws.onmessage = function(event){
  		var obj = JSON.parse(event.data)
  		console.log(JSON.stringify(obj))
@@ -13,4 +14,3 @@ $(document).ready(function() {
  	}
 })
 var dummy = "This resteraunt\'s burgers smelled."
-ws.send("querytext::" + dummy)
