@@ -52,12 +52,7 @@ function setUpSocket() {
 setUpSocket()
 
 var jobID
-/*
-function fetchData() {
 
-}
-*/
-callQuery(data, )
 function callQuery(data, callback) {
 	client.post('analyzesentiment', data, true, function(err, resp) {
 		jobID = resp.body.jobID
