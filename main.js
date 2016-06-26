@@ -63,6 +63,7 @@ function callQuery(data, callback) {
 		else
 		{
 			console.log('We got ' + JSON.stringify(resp.body))
+			callback(resp.body);
 		}
 	})
 }

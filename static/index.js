@@ -1,6 +1,6 @@
 var host = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(host);
-var dummy = "This resteraunt\'s burgers smelled."
+var dummy = "This restaraunt\'s burgers smelled terrible."
 $(document).ready(function() {
 	
 	ws.onopen = function(){
