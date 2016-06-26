@@ -38,7 +38,7 @@ function submitQuery() {
 	var query = $("#comment").val();
 	$("#comment").val("");
 	ws.send("sentiquery::" + query);
-	console.log("emitted" + query);
+	console.log("emitted " + query);
 	return query;
 }
 
