@@ -12,7 +12,7 @@ $(document).ready(function() {
 			e.preventDefault()
 			submitQuery()
 		}
-	}
+	})
 	ws.onmessage = function(event){
  		var obj = JSON.parse(event.data)
  		console.log(JSON.stringify(obj))
