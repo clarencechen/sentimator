@@ -59,6 +59,9 @@ function callQuery(data, callback) {
 		console.log(jobID)
 	})
 	
+
+	var responded = false
+	while(responded === false)
 	client.getJobStatus(jobID, function(err, resp) {
 		if(err)
 		{
@@ -66,7 +69,11 @@ function callQuery(data, callback) {
 			bail(err, callback)
 		}
 		else
+		{
 			console.log('We got ' + JSON.stringify(resp.body))
+			if(resp.body.aggregate)
+				responded = true;
+		}	
 	})
 }
 
