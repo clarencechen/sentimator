@@ -42,73 +42,35 @@ var convpatterns = [
 	["(.*)","Do you have any hobbies?", "I see,  please continue...", "What exactly are we talking about?", "Can you go over that again please..", "Um, i get the feeling this conversation is not going anywhere..",  "oh yeah?",  "hmm, is that so..", "Please tell me more.","Let's change focus a bit... Tell me about your family.","Can you elaborate on that?","I see.","Very interesting.", "I see.  And what does that tell you?","How does that make you feel?","How do you feel when you say that?","If you had to have one piece of music softly playing in your mind for the rest of your life, what would you want it to be?","What room of your home do you spend the most time in?","If you could go back in time and become friends with one famous person, whom would you chose?","Which of the seven dwarfs personifies you best – Dopey, Sneezy, Sleepy, Bashful, Grumpy, Happy, or Doc?","Which animal would you leave out of the ark?"]
 	]
 
-//-------
+
 function mainroutine(input) {
 	$('div.popup-messages').append('<p class="user-messages">' + input + '</p>')
-
-	var output = conversationpatterns(input)
-	$('div.popup-messages').append('<p class="bot-messages">' + output + '</p>')
+	ws.send("sentiquery::" + input);
+	console.log("emitted " + input);
 }
-
-
-//-------
-function conversationpatterns(input) {
+ws.onmessage = function(event){
 	var last = $('p.bot-messages')[$('p.bot-messages').length -1].textContent
 	var output = "";
-	if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
+	var obj = JSON.parse(event.data)
+	if(obj.error)
+		console.log(JSON.stringify(obj.error))
+	else if(obj.negative[0])
 	{
-		ws.send("sentiquery::" + input);
-		console.log("emitted " + input);
-		while(output === "")
-		{
-			ws.onmessage = function(event){
-				var obj = JSON.parse(event.data)
-				if(obj.error)
-					console.log(JSON.stringify(obj.error))
-				else if(obj.negative[0])
-					output = "I'm sorry that you didn't like the " + obj.negative[0].topic +". Tell me more."
-				else
-					output = "I didn't really get what complaints you have. Please try rephrasing your sentence."
-			}
-		}
-		
-	}
-	else if(last.contains('I\'m sorry that you didn\'t like the ') || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
-	{
-		ws.send("sentiquery::" + input);
-		console.log("emitted " + input);
-		while(output === "")
-		{
-			ws.onmessage = function(event){
-				var obj = JSON.parse(event.data)
-				if(obj.error)
-					console.log(JSON.stringify(obj.error))
-				else if(obj.negative[0])
-					output = "We will try our utmost to improve our " + obj.negative[0].topic + " in the future. Also, as an apology, we will offer you a free A La Carte item if you deicide to come again."
-				else
-					output = "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly."
-			}	
-		}
+		if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
+			output = "I'm sorry that you didn't like the " + obj.negative[0].topic +". Tell me more."
+		else if(last.contains('I\'m sorry that you didn\'t like the ') || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
+			output = "We will try our utmost to improve our " + obj.negative[0].topic + " in the future. Also, as an apology, we will offer you a free A La Carte item if you deicide to come again."
+		else
+			output = "Goodbye."
 	}
 	else
-		output = "Goodbye."
-	return output;
-
-/*	for (i=0; i < convpatterns.length; i++) {
-		re = new RegExp (convpatterns[i][0], "i");
-		if (re.test(input)) {
-			len = convpatterns[i].length - 1;
-			index = Math.ceil( len * Math.random());
-			reply = convpatterns[i][index];
-			var output = input.replace(re, reply);
-			output = initialCap(output);
-			return output;
-			break;
-		}
-	}*/
-}
-
-function initialCap(field) {
-   field = field.substr(0, 1).toUpperCase() + field.substr(1, field.length)
-   return field
+	{
+		if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
+			output = "I didn't really get what complaints you have. Please try rephrasing your sentence."
+		else if(last.contains('I\'m sorry that you didn\'t like the ') || last === "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly.")
+			output = "Please be a bit more specifc about your complaints. I know that people can jump to conclusions really quickly."
+		else
+			output = "Goodbye."
+	}
+	$('div.popup-messages').append('<p class="bot-messages">' + output + '</p>')
 }
