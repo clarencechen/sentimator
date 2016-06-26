@@ -19,9 +19,9 @@ $(document).ready(function() {
 })
 
 function submitQuery() {
-	if(("#comment").val == "")
+	if(("#comment").val() == "")
 		return;
-	var query = $("#comment").val;
+	var query = $("#comment").val();
 	$("#comment").val("");
 	ws.send("querytext::" + query);
 	console.log("emitted" + query);
