@@ -61,7 +61,7 @@ function mainroutine(uinput) {
 //-------
 function conversationpatterns() {
 	for (i=0; i < convpatterns.length; i++) {
-		re = new RegExp (convpatterns[i],[0],, "i");
+		re = new RegExp (convpatterns[i][0], "i");
 		if (re.test(uinput)) {
 			len = convpatterns[i],.length - 1;
 			index = Math.ceil( len * Math.random());
