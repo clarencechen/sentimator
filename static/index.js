@@ -19,7 +19,7 @@ $(document).ready(function() {
 })
 
 function submitQuery() {
-	if(("#comment").val() == "")
+	if($("#comment").val() == "")
 		return;
 	var query = $("#comment").val();
 	$("#comment").val("");
