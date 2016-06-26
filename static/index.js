@@ -11,6 +11,6 @@ $(document).ready(function() {
  		else
  			$("#analysis").html(JSON.stringify(obj))
  	}
- }
+})
 var dummy = "This resteraunt\'s burgers smelled."
 ws.send("querytext::" + dummy)
