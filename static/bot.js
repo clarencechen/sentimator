@@ -54,11 +54,12 @@ function mainroutine(input) {
 //-------
 function conversationpatterns(input) {
 	var last = $('p.bot-messages')[$('p.bot-messages').length -1].textContent
+	var output = "";
 	if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
 	{
 		ws.send("sentiquery::" + input);
 		console.log("emitted " + input);
-		while(output === undefined)
+		while(output === "")
 		{
 			ws.onmessage = function(event){
 				var obj = JSON.parse(event.data)
@@ -76,7 +77,7 @@ function conversationpatterns(input) {
 	{
 		ws.send("sentiquery::" + input);
 		console.log("emitted " + input);
-		while(output === undefined)
+		while(output === "")
 		{
 			ws.onmessage = function(event){
 				var obj = JSON.parse(event.data)
