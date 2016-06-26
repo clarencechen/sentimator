@@ -49,7 +49,7 @@ dialog = ""
 
 
 //-------
-function mainroutine(uinput) {
+function mainroutine(input) {
 	$('div.popup-messages').append('<p class="user-messages">' + uinput + '</p>')
 	var output = conversationpatterns(input)
 	$('div.popup-messages').append('<p class="bot-messages">' + dialog + '</p>')
