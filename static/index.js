@@ -10,10 +10,13 @@ $(document).ready(function() {
 		}
 	})
 	ws.onmessage = function(event){
-	if(JSON.parse(event.data).aggregate.sentiment == "negative")
+	var obj = JSON.parse(event.data)
+	if(obj.error)
+		console.log(JSON.stringify(obj.error))
+	else if(obj.aggregate.sentiment == "negative")
 		startBot(event)
 	else
-		$('body').append('<p class="review">' + currQuery + '</p>')
+		$('footer').append('<p class="review">' + currQuery + '</p>')
 	} 
 })
 
@@ -29,9 +32,7 @@ function submitQuery() {
 
 function startBot(event) {
 	var obj = JSON.parse(event.data)
-	console.log(JSON.stringify(obj))
-	if(obj.error)
-		$("p#chatbot").html(JSON.stringify(obj.error))
+	console.log('We got a negative review: ' + JSON.stringify(obj))
 	else
 		$("p#chatbot").html(JSON.stringify(obj))
 }
