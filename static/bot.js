@@ -66,9 +66,13 @@ function conversationpatterns(input) {
 			reply = convpatterns[i][index];
 			var output = input.replace(re, reply);
 			output = initialCap(soutput);
-			return output +  '\r' + "\n";
+			return output;
 			break;
 		}
 	}
 }
 
+function initialCap(field) {
+   field = field.substr(0, 1).toUpperCase() + field.substr(1)
+   return field
+}
