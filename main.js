@@ -15,9 +15,9 @@ var server = http.createServer(app)
 server.listen(port)
 
 var WebSocket = require("ws")
-var ws = new WebSocket('wss://sentimator.herokuapp.com/')
 
 function setUpSocket() {
+	var ws = new WebSocket('wss://sentimator.herokuapp.com/')
 	var WebSocketServer = require("ws").Server
 	var wss = new WebSocketServer({server: server})
 	console.log("websocket server created")
