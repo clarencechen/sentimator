@@ -24,6 +24,7 @@ function setUpSocket() {
 	wss.on("connection", function(ws) {
 		console.log("websocket connection open")
 		ws.on("message", function(data) {//data from webpage
+			console.log('received data')
 			var stuff = data.split("::")
 			var id = stuff[0]
 			var data = stuff[1]
@@ -32,6 +33,7 @@ function setUpSocket() {
 				case "querytext":
 				{
 					var formatted = {'text' : data}
+					console.log('about to call api')
 					callQuery(formatted, function(resp) {
 						console.log("In callback")
 						ws.send(JSON.stringify(resp))//send to webpage
