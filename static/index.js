@@ -45,7 +45,7 @@ function display_popup(maintain, show) {
 		element.style.right = "220 px";
 		element.style.display = "block";
 	}
-	else if(element === undefined && show === true)
+	else if(element === null && show === true)
 	{
 		register_popup(0, 'chatbot')
 	}
