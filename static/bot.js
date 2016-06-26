@@ -50,23 +50,21 @@ dialog = ""
 
 //-------
 function mainroutine(uinput) {
-	uinput += '\r' + "\n";
 	$('div.popup-messages').append('<p class="user-messages">' + uinput + '</p>')
-	var output = conversationpatterns()
-	output += '\r' + "\n";
+	var output = conversationpatterns(input)
 	$('div.popup-messages').append('<p class="bot-messages">' + dialog + '</p>')
 }
 
 
 //-------
-function conversationpatterns() {
+function conversationpatterns(input) {
 	for (i=0; i < convpatterns.length; i++) {
 		re = new RegExp (convpatterns[i][0], "i");
-		if (re.test(uinput)) {
+		if (re.test(input)) {
 			len = convpatterns[i].length - 1;
 			index = Math.ceil( len * Math.random());
 			reply = convpatterns[i][index];
-			soutput = uinput.replace(re, reply);
+			soutput = input.replace(re, reply);
 			soutput = initialCap(soutput);
 			return soutput +  '\r' + "\n";
 			break;
