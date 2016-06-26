@@ -10,22 +10,23 @@ $(document).ready(function() {
 			currQuery = submitQuery()
 		}
 	})
-	ws.onmessage = function(event){
-	var obj = JSON.parse(event.data)
-	if(obj.error)
-		console.log(JSON.stringify(obj.error))
-	else if(obj.negative[0])
-		startBot(event)
-	else
-		$('footer').append('<p class="review">' + currQuery + '</p>')
-	}
-	$("button.popup-send").click(submitToBot)
-	$("textarea.popup-reply").keypress(function(e){
+	$(".popup-send").click(submitToBot)
+	$(".popup-reply").keypress(function(e){
 		if(e.which == 13) {
 			e.preventDefault()
 			submitToBot()
 		}
 	})
+
+	ws.onmessage = function(event){
+		var obj = JSON.parse(event.data)
+		if(obj.error)
+			console.log(JSON.stringify(obj.error))
+		else if(obj.negative[0])
+			startBot(event)
+		else
+			$('footer').append('<p class="review">' + currQuery + '</p>')
+	}
 })
 $(document).resize(function(event) {
 	display_popup(true, false)
