@@ -39,7 +39,7 @@ function startBot(event) {
 }
 
 function display_popup(maintain, show) {
-	var element = document.getElementById(popup);
+	var element = document.getElementById('popup');
 	if(element !== undefined && maintain === true)
 	{
 		element.style.right = "220 px";
