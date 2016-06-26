@@ -53,7 +53,7 @@ function mainroutine(input) {
 
 //-------
 function conversationpatterns(input) {
-	var last = $('p.bot-messages')[$('p.bot-messages').length -1].textContent()
+	var last = $('p.bot-messages')[$('p.bot-messages').length -1].textContent
 	if(last === "Hi! We noticed that you did not enjoy our restaurant. Can we help improve your experience?" || last === "I didn't really get what complaints you have. Please try rephrasing your sentence.")
 	{
 		ws.send("sentiquery::" + input);
