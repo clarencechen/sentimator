@@ -62,19 +62,21 @@ function callQuery(data, callback) {
 
 	var responded = false
 	while(responded === false)
-	client.getJobStatus(jobID, function(err, resp) {
-		if(err)
-		{
-			console.log('An error occured! ' + err)
-			bail(err, callback)
-		}
-		else
-		{
-			console.log('We got ' + JSON.stringify(resp.body))
-			if(resp.body.aggregate)
-				responded = true;
-		}	
-	})
+	{
+		client.getJobStatus(jobID, function(err, resp) {
+			if(err)
+			{
+				console.log('An error occured! ' + err)
+				bail(err, callback)
+			}
+			else
+			{
+				console.log('We got ' + JSON.stringify(resp.body))
+				if(resp.body.aggregate)
+					responded = true;
+			}
+		})	
+	}
 }
 
 function bail(err, callback) {
