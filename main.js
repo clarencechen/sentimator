@@ -3,7 +3,7 @@ console.log('app started')
 
 var express = require('express')
 var havenondemand = require('havenondemand')
-var client = new havenondemand.HODClient('eb549982-2c3d-48d9-9c50-8b41a51151ec', 'v2')
+var client = new havenondemand.HODClient('eb549982-2c3d-48d9-9c50-8b41a51151ec', 'v1')
 var http = require('http')
 
 var app = express()
