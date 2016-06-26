@@ -32,9 +32,9 @@ function setUpSocket() {
 				case "querytext":
 				{
 					var formatted = {'text' : data}
-					callQuery(formatted, function(formatted) {
+					callQuery(formatted, function(resp) {
 						console.log("In callback")
-						ws.send(JSON.stringify(data))//send to webpage
+						ws.send(JSON.stringify(resp))//send to webpage
 					})
 					break
 				}
