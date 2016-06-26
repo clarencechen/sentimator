@@ -3,7 +3,7 @@ console.log('app started')
 
 var express = require('express')
 var havenondemand = require('havenondemand')
-var client = new havenondemand.HODClient('eb549982-2c3d-48d9-9c50-8b41a51151ec', 'v1')
+var client = new havenondemand.HODClient('eb549982-2c3d-48d9-9c50-8b41a51151ec', 'v2')
 var http = require('http')
 
 var app = express()
@@ -30,10 +30,10 @@ function setUpSocket() {
 			var data = stuff[1]
 		
 			switch (id) {
-				case "querytext":
+				case "sentiquery":
 				{
 					var formatted = {'text' : data}
-					console.log('about to call api')
+					console.log('about to call sentiment api')
 					callQuery(formatted, function(resp) {
 						console.log("In callback")
 						ws.send(JSON.stringify(resp))//send to webpage
@@ -44,6 +44,7 @@ function setUpSocket() {
 			
 			}
 		});
+
 		ws.on("close", function() {
 			console.log("websocket connection close")
 		})
