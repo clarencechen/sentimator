@@ -74,6 +74,6 @@ function conversationpatterns(input) {
 }
 
 function initialCap(field) {
-   field = field.substr(0, 1).toUpperCase() + field.substr(1)
+   field = field.substr(0, 1).toUpperCase() + field.substr(1, field.length())
    return field
 }
