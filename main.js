@@ -62,7 +62,7 @@ function callQuery(data, callback) {
 	client.getJobStatus(jobID, function(err, resp) {
 		if(err)
 		{
-			console.log(err)
+			console.log('An error occured! ' +err)
 			bail(err, callback)
 		}
 		else

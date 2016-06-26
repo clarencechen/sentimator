@@ -10,8 +10,8 @@ $(document).ready(function() {
  		var obj = JSON.parse(event.data)
  		console.log(JSON.stringify(obj))
  		if(obj.error)
- 			$("#analysis").html(JSON.stringify(obj.error))
+ 			$("p.analysis").html(JSON.stringify(obj.error))
  		else
- 			$("#analysis").html(JSON.stringify(obj))
+ 			$("p.analysis").html(JSON.stringify(obj))
  	}
 })
