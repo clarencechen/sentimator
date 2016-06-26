@@ -13,7 +13,7 @@ $(document).ready(function() {
 	$("#chatbot").on('click', '.popup-send', function(e) {
 		submitToBot();
 	})
-	$(#chatbot).on('click', '.popup-reply', function(e) {
+	$('#chatbot').on('click', '.popup-reply', function(e) {
 		if(e.which == 13) {
 			e.preventDefault()
 			submitToBot()
