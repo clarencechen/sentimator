@@ -50,9 +50,9 @@ dialog = ""
 
 //-------
 function mainroutine(input) {
-	$('div.popup-messages').append('<p class="user-messages">' + uinput + '</p>')
+	$('div.popup-messages').append('<p class="user-messages">' + input + '</p>')
 	var output = conversationpatterns(input)
-	$('div.popup-messages').append('<p class="bot-messages">' + dialog + '</p>')
+	$('div.popup-messages').append('<p class="bot-messages">' + output + '</p>')
 }
 
 
@@ -64,9 +64,9 @@ function conversationpatterns(input) {
 			len = convpatterns[i].length - 1;
 			index = Math.ceil( len * Math.random());
 			reply = convpatterns[i][index];
-			soutput = input.replace(re, reply);
-			soutput = initialCap(soutput);
-			return soutput +  '\r' + "\n";
+			var output = input.replace(re, reply);
+			output = initialCap(soutput);
+			return output +  '\r' + "\n";
 			break;
 		}
 	}
