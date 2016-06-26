@@ -66,7 +66,7 @@ function callQuery(data, callback) {
 			bail(err, callback)
 		}
 		else
-			console.log('We got ' + resp.body)
+			console.log('We got ' + JSON.stringify(resp.body))
 	})
 }
 
