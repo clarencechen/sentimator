@@ -1,8 +1,8 @@
 var host = location.origin.replace(/^http/, 'ws')
 var ws = new WebSocket(host);
 $(document).ready(function() {
-	$("button.submit").click(submitQuery);
-	$(".comment").keypress(function(e){
+	$("button#submit").click(submitQuery);
+	$("#comment").keypress(function(e){
 		if(e.which == 13) {
 			e.preventDefault()
 			submitQuery()
