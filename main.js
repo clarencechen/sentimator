@@ -17,7 +17,7 @@ server.listen(port)
 var WebSocket = require("ws")
 var ws = new WebSocket('wss://sentimator.herokuapp.com/')
 var WebSocketServer = require("ws").Server
-var wss = new WebSocketServer({server: server})
+var wss = new WebSocketServer({server})
 console.log("websocket server created")
 
 function setUpSocket() {
@@ -36,7 +36,7 @@ function setUpSocket() {
 	      console.log('about to call sentiment api');
 	      callQuery(formatted, resp => {
 	        console.log("In callback");
-	        ws.send(JSON.stringify(resp))//send to webpage
+	        ws.send(JSON.stringify(resp))
 ;					});
 	      break;
 	    }
