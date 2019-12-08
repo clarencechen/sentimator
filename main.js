@@ -21,33 +21,33 @@ var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 function setUpSocket() {
-	wss.on("connection", function(ws) {
-		console.log("websocket connection open")
-		ws.on("message", function(data) {//data from webpage
-			console.log('received data')
-			var stuff = data.split("::")
-			var id = stuff[0]
-			var data = stuff[1]
+	wss.on("connection", ws => {
+	  console.log("websocket connection open");
+	  ws.on("message", data => {//data from webpage
+			console.log('received data');
+	    var stuff = data.split("::");
+	    var id = stuff[0];
+	    var data = stuff[1];
 		
-			switch (id) {
-				case "sentiquery":
-				{
-					var formatted = {'text' : data}
-					console.log('about to call sentiment api')
-					callQuery(formatted, function(resp) {
-						console.log("In callback")
-						ws.send(JSON.stringify(resp))//send to webpage
-					})
-					break
-				}
-				default:
+	    switch (id) {
+	    case "sentiquery":
+	    {
+	      var formatted = {'text' : data};
+	      console.log('about to call sentiment api');
+	      callQuery(formatted, resp => {
+	        console.log("In callback");
+	        ws.send(JSON.stringify(resp))//send to webpage
+;					});
+	      break;
+	    }
+	    default:
 			
-			}
-		});
+			};
+	  });
 
-		ws.on("close", function() {
-			console.log("websocket connection close")
-		})
+	  ws.on("close", () => {
+	    console.log("websocket connection close")
+	  });
 	})
 }
 
@@ -56,17 +56,17 @@ setUpSocket()
 var jobID
 
 function callQuery(data, callback) {
-	client.post('analyzesentiment', data, function(err, resp) {
-		if(err)
-		{
-			console.log('An error occured! ' + err)
-			bail(err, callback)
-		}
+	client.post('analyzesentiment', data, (err, resp) => {
+	  if(err)
+	  {
+	    console.log('An error occured! ' + err);
+	    bail(err, callback);
+	  }
 		else
-		{
-			console.log('We got ' + JSON.stringify(resp.body))
-			callback(resp.body);
-		}
+	  {
+	    console.log('We got ' + JSON.stringify(resp.body));
+	    callback(resp.body);
+	  }
 	})
 }
 
